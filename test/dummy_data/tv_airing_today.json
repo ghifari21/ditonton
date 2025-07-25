@@ -1,0 +1,31 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/qZXhYuCZR6lkspbu400oWwh6uCs.jpg",
+      "genre_ids": [
+        16,
+        35,
+        10751,
+        10762,
+        10765
+      ],
+      "id": 194916,
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "Chiikawa",
+      "overview": "The story follows the sometimes happy, sometimes sad, and a tad stressful daily life of \"some sort of small, cute creature\" (Nanka Chiisakute Kawaii Yatsu) known as Chiikawa. Chiikawa enjoys delicious food with bees and rabbits, toils hard every day for the rewards of work, and still maintains a smile.",
+      "popularity": 111.0469,
+      "poster_path": "/cXm3mxmlOWJZAyn5fqFI9JpARa3.jpg",
+      "first_air_date": "2022-04-04",
+      "name": "Chiikawa",
+      "vote_average": 8.8,
+      "vote_count": 8
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 10
+}

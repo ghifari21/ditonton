@@ -1,0 +1,30 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/sKlF9YrVu84DYMDAUZEZDCvDxK2.jpg",
+      "genre_ids": [
+        16,
+        35,
+        18,
+        10765
+      ],
+      "id": 244808,
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "Nukitashi THE ANIMATION",
+      "overview": "On Seiran Island, secret society NLNS is united by Junnosuke Tachibana, who is determined to crush a law. They have found a benefactor, an unknown rich man, who offers them a secret base and cash. Their mission is to locate a mysterious girl and stop the law, keeping the SHO off their trail.",
+      "popularity": 1278.8726,
+      "poster_path": "/zlybZJXfu4IpPnWXhnRtobl9BgZ.jpg",
+      "first_air_date": "2025-07-19",
+      "name": "Nukitashi the Animation",
+      "vote_average": 4.9,
+      "vote_count": 4
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 10
+}
