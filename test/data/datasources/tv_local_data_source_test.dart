@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late TvLocalDataSourceImpl dataSource;
+  late TVLocalDataSourceImpl dataSource;
   late MockDatabaseHelper mockDatabaseHelper;
 
   setUp(() {
     mockDatabaseHelper = MockDatabaseHelper();
-    dataSource = TvLocalDataSourceImpl(databaseHelper: mockDatabaseHelper);
+    dataSource = TVLocalDataSourceImpl(databaseHelper: mockDatabaseHelper);
   });
 
   group('save watchlist', () {

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
-  static const ROUTE_NAME = '/search';
+  static const routeName = '/search';
 
   const SearchPage({super.key});
 
@@ -22,7 +22,7 @@ class SearchPage extends StatelessWidget {
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Movies'),
-              Tab(text: 'TV Shows'),
+              Tab(text: 'TV Series'),
             ],
           ),
         ),
@@ -50,11 +50,11 @@ class SearchPage extends StatelessWidget {
                 textInputAction: TextInputAction.search,
               ),
               SizedBox(height: 16),
-              Text('Search Result', style: kHeading6),
+              Text('Search Result', style: textHeading6),
 
               Expanded(
                 child: TabBarView(
-                  children: [_buildMovieSearchResult(), _buildTvSearchResult()],
+                  children: [_buildMovieSearchResult(), _buildTVSearchResult()],
                 ),
               ),
             ],
@@ -88,7 +88,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTvSearchResult() {
+  Widget _buildTVSearchResult() {
     return Consumer<TvSearchNotifier>(
       builder: (context, data, _) {
         if (data.state == RequestState.Loading) {

@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/get_airing_today_tvs.dart';
 import 'package:flutter/material.dart';
 
 class AiringTodayTvsNotifier extends ChangeNotifier {
-  final GetAiringTodayTvs getAiringTodayTvs;
+  final GetAiringTodayTVs getAiringTodayTvs;
 
   AiringTodayTvsNotifier({required this.getAiringTodayTvs});
 
@@ -12,9 +12,9 @@ class AiringTodayTvsNotifier extends ChangeNotifier {
 
   RequestState get state => _state;
 
-  List<Tv> _tvs = [];
+  List<TV> _tvs = [];
 
-  List<Tv> get tvs => _tvs;
+  List<TV> get tvs => _tvs;
 
   String _message = '';
 

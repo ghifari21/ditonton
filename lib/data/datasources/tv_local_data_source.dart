@@ -2,23 +2,23 @@ import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/models/tv_table.dart';
 
-abstract class TvLocalDataSource {
-  Future<String> insertWatchlist(TvTable tv);
+abstract class TVLocalDataSource {
+  Future<String> insertWatchlist(TVTable tv);
 
-  Future<String> removeWatchlist(TvTable tv);
+  Future<String> removeWatchlist(TVTable tv);
 
-  Future<TvTable?> getTvById(int id);
+  Future<TVTable?> getTvById(int id);
 
-  Future<List<TvTable>> getWatchlistTvs();
+  Future<List<TVTable>> getWatchlistTvs();
 }
 
-class TvLocalDataSourceImpl implements TvLocalDataSource {
+class TVLocalDataSourceImpl implements TVLocalDataSource {
   final DatabaseHelper databaseHelper;
 
-  TvLocalDataSourceImpl({required this.databaseHelper});
+  TVLocalDataSourceImpl({required this.databaseHelper});
 
   @override
-  Future<String> insertWatchlist(TvTable tv) async {
+  Future<String> insertWatchlist(TVTable tv) async {
     try {
       await databaseHelper.insertTvWatchlist(tv);
       return 'Added to Watchlist';
@@ -28,7 +28,7 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
   }
 
   @override
-  Future<String> removeWatchlist(TvTable tv) async {
+  Future<String> removeWatchlist(TVTable tv) async {
     try {
       await databaseHelper.removeTvWatchlist(tv);
       return 'Removed from Watchlist';
@@ -38,18 +38,18 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
   }
 
   @override
-  Future<TvTable?> getTvById(int id) async {
+  Future<TVTable?> getTvById(int id) async {
     final result = await databaseHelper.getTvById(id);
     if (result != null) {
-      return TvTable.fromMap(result);
+      return TVTable.fromMap(result);
     } else {
       return null;
     }
   }
 
   @override
-  Future<List<TvTable>> getWatchlistTvs() async {
+  Future<List<TVTable>> getWatchlistTvs() async {
     final result = await databaseHelper.getWatchlistTvs();
-    return result.map((data) => TvTable.fromMap(data)).toList();
+    return result.map((data) => TVTable.fromMap(data)).toList();
   }
 }

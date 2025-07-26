@@ -3,12 +3,12 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/repositories/tv_repository.dart';
 
-class RemoveTvWatchlist {
-  final TvRepository repository;
+class RemoveTVWatchlist {
+  final TVRepository repository;
 
-  RemoveTvWatchlist(this.repository);
+  RemoveTVWatchlist(this.repository);
 
-  Future<Either<Failure, String>> execute(TvDetail tv) {
+  Future<Either<Failure, String>> execute(TVDetail tv) {
     return repository.removeWatchlist(tv);
   }
 }

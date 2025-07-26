@@ -4,13 +4,13 @@ import 'package:ditonton/domain/usecases/get_watchlist_tvs.dart';
 import 'package:flutter/material.dart';
 
 class WatchlistTvNotifier extends ChangeNotifier {
-  final GetWatchlistTvs getWatchlistTvs;
+  final GetWatchlistTVs getWatchlistTvs;
 
   WatchlistTvNotifier({required this.getWatchlistTvs});
 
-  var _watchlistTvs = <Tv>[];
+  var _watchlistTvs = <TV>[];
 
-  List<Tv> get watchlistTvs => _watchlistTvs;
+  List<TV> get watchlistTvs => _watchlistTvs;
 
   RequestState _watchlistState = RequestState.Empty;
 

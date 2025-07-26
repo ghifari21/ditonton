@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTopRatedTvs usecase;
+  late GetTopRatedTVs usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = GetTopRatedTvs(mockTvRepository);
+    usecase = GetTopRatedTVs(mockTvRepository);
   });
 
   test('should return top rated TV list from repository', () async {

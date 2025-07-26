@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/top-rated-movie';
+  static const routeName = '/top-rated-movie';
 
   const TopRatedMoviesPage({super.key});
 
   @override
-  _TopRatedMoviesPageState createState() => _TopRatedMoviesPageState();
+  State<TopRatedMoviesPage> createState() => _TopRatedMoviesPageState();
 }
 
 class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
@@ -32,7 +32,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<TopRatedMoviesNotifier>(
-          builder: (context, data, child) {
+          builder: (_, data, _) {
             if (data.state == RequestState.Loading) {
               return Center(child: CircularProgressIndicator());
             } else if (data.state == RequestState.Loaded) {

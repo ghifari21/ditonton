@@ -1,7 +1,7 @@
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
-class TvDetail extends Equatable {
+class TVDetail extends Equatable {
   final bool adult;
   final String? backdropPath;
   final List<int> episodeRunTime;
@@ -27,7 +27,7 @@ class TvDetail extends Equatable {
   final double voteAverage;
   final int voteCount;
 
-  TvDetail({
+  const TVDetail({
     required this.adult,
     required this.backdropPath,
     required this.episodeRunTime,

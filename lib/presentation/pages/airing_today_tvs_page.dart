@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AiringTodayTvsPage extends StatefulWidget {
-  static const ROUTE_NAME = '/airing-today-tvs';
+  static const routeName = '/airing-today-tvs';
 
   const AiringTodayTvsPage({super.key});
 
@@ -32,7 +32,7 @@ class _AiringTodayTvsPageState extends State<AiringTodayTvsPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<AiringTodayTvsNotifier>(
-          builder: (context, data, child) {
+          builder: (_, data, _) {
             if (data.state == RequestState.Loading) {
               return Center(child: CircularProgressIndicator());
             } else if (data.state == RequestState.Loaded) {

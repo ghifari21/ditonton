@@ -7,16 +7,16 @@ import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTvRecommendations usecase;
+  late GetTVRecommendations usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = GetTvRecommendations(mockTvRepository);
+    usecase = GetTVRecommendations(mockTvRepository);
   });
 
   final tId = 1;
-  final tTvShows = <Tv>[];
+  final tTvShows = <TV>[];
 
   test('should get list of tv recommendations from the repository', () async {
     when(

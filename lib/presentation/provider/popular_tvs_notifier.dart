@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/get_popular_tvs.dart';
 import 'package:flutter/material.dart';
 
 class PopularTvsNotifier extends ChangeNotifier {
-  final GetPopularTvs getPopularTvs;
+  final GetPopularTVs getPopularTvs;
 
   PopularTvsNotifier({required this.getPopularTvs});
 
@@ -12,9 +12,9 @@ class PopularTvsNotifier extends ChangeNotifier {
 
   RequestState get state => _state;
 
-  List<Tv> _popularTvs = [];
+  List<TV> _popularTvs = [];
 
-  List<Tv> get tvs => _popularTvs;
+  List<TV> get tvs => _popularTvs;
 
   String _message = '';
 

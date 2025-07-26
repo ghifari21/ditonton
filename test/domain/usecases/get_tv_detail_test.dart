@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTvDetail usecase;
+  late GetTVDetail usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = GetTvDetail(mockTvRepository);
+    usecase = GetTVDetail(mockTvRepository);
   });
 
   final tId = 1;

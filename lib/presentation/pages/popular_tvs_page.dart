@@ -4,16 +4,16 @@ import 'package:ditonton/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PopularTvsPage extends StatefulWidget {
-  static const ROUTE_NAME = '/popular-tvs';
+class PopularTVsPage extends StatefulWidget {
+  static const routeName = '/popular-tvs';
 
-  const PopularTvsPage({super.key});
+  const PopularTVsPage({super.key});
 
   @override
-  State<PopularTvsPage> createState() => _PopularTvsPageState();
+  State<PopularTVsPage> createState() => _PopularTVsPageState();
 }
 
-class _PopularTvsPageState extends State<PopularTvsPage> {
+class _PopularTVsPageState extends State<PopularTVsPage> {
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,7 @@ class _PopularTvsPageState extends State<PopularTvsPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<PopularTvsNotifier>(
-          builder: (context, data, child) {
+          builder: (_, data, _) {
             if (data.state == RequestState.Loading) {
               return Center(child: CircularProgressIndicator());
             } else if (data.state == RequestState.Loaded) {

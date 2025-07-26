@@ -15,20 +15,20 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late TvRepositoryImpl repository;
+  late TVRepositoryImpl repository;
   late MockTvRemoteDataSource mockTvRemoteDataSource;
   late MockTvLocalDataSource mockTvLocalDataSource;
 
   setUp(() {
     mockTvRemoteDataSource = MockTvRemoteDataSource();
     mockTvLocalDataSource = MockTvLocalDataSource();
-    repository = TvRepositoryImpl(
+    repository = TVRepositoryImpl(
       remoteDataSource: mockTvRemoteDataSource,
       localDataSource: mockTvLocalDataSource,
     );
   });
 
-  final tTvModel = TvModel(
+  final tTvModel = TVModel(
     backdropPath: '/96RT2A47UdzWlUfvIERFyBsLhL2.jpg',
     firstAirDate: '2023-09-29',
     genreIds: [16, 10759, 18, 10765],
@@ -45,7 +45,7 @@ void main() {
     voteCount: 475,
   );
 
-  final tTv = Tv(
+  final tTv = TV(
     backdropPath: '/96RT2A47UdzWlUfvIERFyBsLhL2.jpg',
     firstAirDate: '2023-09-29',
     genreIds: [16, 10759, 18, 10765],
@@ -62,8 +62,8 @@ void main() {
     voteCount: 475,
   );
 
-  final tTvList = <Tv>[tTv];
-  final tTvModelList = <TvModel>[tTvModel];
+  final tTvList = <TV>[tTv];
+  final tTvModelList = <TVModel>[tTvModel];
 
   group('Airing Today TV Series', () {
     test(
@@ -247,7 +247,7 @@ void main() {
 
   group('Get TV Detail', () {
     final tId = 1;
-    final tTvResponse = TvDetailResponse(
+    final tTvResponse = TVDetailResponse(
       adult: false,
       backdropPath: '/96RT2A47UdzWlUfvIERFyBsLhL2.jpg',
       episodeRunTime: [25],
@@ -319,7 +319,7 @@ void main() {
 
   group('Get TV Series Recommendations', () {
     final tId = 1;
-    final tTvList = <TvModel>[];
+    final tTvList = <TVModel>[];
 
     test(
       'should return TV list when the call to remote data source is success',

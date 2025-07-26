@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/get_on_the_air_tvs.dart';
 import 'package:flutter/material.dart';
 
 class OnTheAirTvsNotifier extends ChangeNotifier {
-  final GetOnTheAirTvs getOnTheAirTvs;
+  final GetOnTheAirTVs getOnTheAirTvs;
 
   OnTheAirTvsNotifier({required this.getOnTheAirTvs});
 
@@ -12,9 +12,9 @@ class OnTheAirTvsNotifier extends ChangeNotifier {
 
   RequestState get state => _state;
 
-  List<Tv> _tvs = [];
+  List<TV> _tvs = [];
 
-  List<Tv> get tvs => _tvs;
+  List<TV> get tvs => _tvs;
 
   String _message = '';
 

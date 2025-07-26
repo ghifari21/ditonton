@@ -61,7 +61,7 @@ final testMovieMap = {
   'title': 'title',
 };
 
-final testTv = Tv(
+final testTv = TV(
   backdropPath: '/96RT2A47UdzWlUfvIERFyBsLhL2.jpg',
   firstAirDate: '2023-09-29',
   genreIds: [16, 10759, 18, 10765],
@@ -80,7 +80,7 @@ final testTv = Tv(
 
 final testTvList = [testTv];
 
-final testTvDetail = TvDetail(
+final testTvDetail = TVDetail(
   adult: false,
   backdropPath: '/96RT2A47UdzWlUfvIERFyBsLhL2.jpg',
   episodeRunTime: [25],
@@ -107,14 +107,14 @@ final testTvDetail = TvDetail(
   voteCount: 475,
 );
 
-final testWatchlistTv = Tv.watchlist(
+final testWatchlistTv = TV.watchlist(
   id: 1,
   name: 'name',
   posterPath: 'posterPath',
   overview: 'overview',
 );
 
-final testTvTable = TvTable(
+final testTvTable = TVTable(
   id: 1,
   title: 'name',
   posterPath: 'posterPath',

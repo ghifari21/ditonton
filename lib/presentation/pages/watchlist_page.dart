@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistPage extends StatefulWidget {
-  static const ROUTE_NAME = '/watchlist';
+  static const routeName = '/watchlist';
 
   const WatchlistPage({super.key});
 
   @override
-  _WatchlistPageState createState() => _WatchlistPageState();
+  State<WatchlistPage> createState() => _WatchlistPageState();
 }
 
 class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
@@ -58,7 +58,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer2<WatchlistMovieNotifier, WatchlistTvNotifier>(
-          builder: (context, dataMovie, dataTv, child) {
+          builder: (_, dataMovie, dataTv, _) {
             if (dataMovie.watchlistState == RequestState.Loading &&
                 dataTv.watchlistState == RequestState.Loading) {
               return Center(child: CircularProgressIndicator());
@@ -80,7 +80,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
                   final item = combinedWatchlist[index];
                   if (item is Movie) {
                     return MovieCard(item);
-                  } else if (item is Tv) {
+                  } else if (item is TV) {
                     return TvCard(item);
                   }
 

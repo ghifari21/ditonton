@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/get_top_rated_tvs.dart';
 import 'package:flutter/material.dart';
 
 class TopRatedTvsNotifier extends ChangeNotifier {
-  final GetTopRatedTvs getTopRatedTvs;
+  final GetTopRatedTVs getTopRatedTvs;
 
   TopRatedTvsNotifier({required this.getTopRatedTvs});
 
@@ -12,9 +12,9 @@ class TopRatedTvsNotifier extends ChangeNotifier {
 
   RequestState get state => _state;
 
-  List<Tv> _topRatedTvs = [];
+  List<TV> _topRatedTvs = [];
 
-  List<Tv> get tvs => _topRatedTvs;
+  List<TV> get tvs => _topRatedTvs;
 
   String _message = '';
 

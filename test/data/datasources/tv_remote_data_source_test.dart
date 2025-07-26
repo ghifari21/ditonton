@@ -15,16 +15,16 @@ void main() {
   const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
   const BASE_URL = 'https://api.themoviedb.org/3';
 
-  late TvRemoteDataSourceImpl dataSource;
+  late TVRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = TvRemoteDataSourceImpl(client: mockHttpClient);
+    dataSource = TVRemoteDataSourceImpl(client: mockHttpClient);
   });
 
   group('get Airing Today TV Series', () {
-    final tTvList = TvResponse.fromJson(
+    final tTvList = TVResponse.fromJson(
       json.decode(readJson('dummy_data/tv_airing_today.json')),
     ).tvList;
 
@@ -57,7 +57,7 @@ void main() {
   });
 
   group('get On The Air TV Series', () {
-    final tTvList = TvResponse.fromJson(
+    final tTvList = TVResponse.fromJson(
       json.decode(readJson('dummy_data/tv_on_the_air.json')),
     ).tvList;
 
@@ -90,7 +90,7 @@ void main() {
   });
 
   group('get Popular TV Series', () {
-    final tTvList = TvResponse.fromJson(
+    final tTvList = TVResponse.fromJson(
       json.decode(readJson('dummy_data/tv_popular.json')),
     ).tvList;
 
@@ -123,7 +123,7 @@ void main() {
   });
 
   group('get Top Rated TV Series', () {
-    final tTvList = TvResponse.fromJson(
+    final tTvList = TVResponse.fromJson(
       json.decode(readJson('dummy_data/tv_top_rated.json')),
     ).tvList;
 
@@ -157,7 +157,7 @@ void main() {
 
   group('get TV Detail', () {
     final tId = 1;
-    final tTvDetail = TvDetailResponse.fromJson(
+    final tTvDetail = TVDetailResponse.fromJson(
       json.decode(readJson('dummy_data/tv_detail.json')),
     );
 
@@ -191,7 +191,7 @@ void main() {
 
   group('get TV Recommendations', () {
     final tId = 1;
-    final tTvList = TvResponse.fromJson(
+    final tTvList = TVResponse.fromJson(
       json.decode(readJson('dummy_data/tv_recommendations.json')),
     ).tvList;
 
@@ -231,7 +231,7 @@ void main() {
 
   group('search TV Series', () {
     final tQuery = 'The Fragrant Flower Blooms with Dignity';
-    final tTvList = TvResponse.fromJson(
+    final tTvList = TVResponse.fromJson(
       json.decode(readJson('dummy_data/search_tv.json')),
     ).tvList;
 

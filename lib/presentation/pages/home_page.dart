@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -70,12 +70,12 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistPage.routeName);
               },
             ),
             ListTile(
               onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                Navigator.pushNamed(context, AboutPage.routeName);
               },
               leading: Icon(Icons.info_outline),
               title: Text('About'),
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SearchPage.routeName);
             },
             icon: Icon(Icons.search),
           ),
@@ -101,10 +101,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Movies', style: kHeading5),
-                Text('Now Playing', style: kHeading6),
+                Text('Movies', style: textHeading5),
+                Text('Now Playing', style: textHeading6),
                 Consumer<MovieListNotifier>(
-                  builder: (context, data, child) {
+                  builder: (_, data, _) {
                     final state = data.nowPlayingState;
                     if (state == RequestState.Loading) {
                       return Center(child: CircularProgressIndicator());
@@ -117,13 +117,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 _buildSubHeading(
                   title: 'Popular',
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    PopularMoviesPage.ROUTE_NAME,
-                  ),
+                  onTap: () =>
+                      Navigator.pushNamed(context, PopularMoviesPage.routeName),
                 ),
                 Consumer<MovieListNotifier>(
-                  builder: (context, data, child) {
+                  builder: (_, data, _) {
                     final state = data.popularMoviesState;
                     if (state == RequestState.Loading) {
                       return Center(child: CircularProgressIndicator());
@@ -138,11 +136,11 @@ class _HomePageState extends State<HomePage> {
                   title: 'Top Rated',
                   onTap: () => Navigator.pushNamed(
                     context,
-                    TopRatedMoviesPage.ROUTE_NAME,
+                    TopRatedMoviesPage.routeName,
                   ),
                 ),
                 Consumer<MovieListNotifier>(
-                  builder: (context, data, child) {
+                  builder: (_, data, _) {
                     final state = data.topRatedMoviesState;
                     if (state == RequestState.Loading) {
                       return Center(child: CircularProgressIndicator());
@@ -154,21 +152,21 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 const Divider(thickness: 1, height: 32),
-                Text('TV Series', style: kHeading5),
+                Text('TV Series', style: textHeading5),
                 _buildSubHeading(
                   title: 'Airing Today',
                   onTap: () => Navigator.pushNamed(
                     context,
-                    AiringTodayTvsPage.ROUTE_NAME,
+                    AiringTodayTvsPage.routeName,
                   ),
                 ),
                 Consumer<TvListNotifier>(
-                  builder: (context, data, _) {
+                  builder: (_, data, _) {
                     final state = data.airingTodayState;
                     if (state == RequestState.Loading) {
                       return Center(child: CircularProgressIndicator());
                     } else if (state == RequestState.Loaded) {
-                      return TvList(data.airingTodayTvs);
+                      return TVList(data.airingTodayTvs);
                     } else {
                       return Text('Failed');
                     }
@@ -177,15 +175,15 @@ class _HomePageState extends State<HomePage> {
                 _buildSubHeading(
                   title: 'On The Air',
                   onTap: () =>
-                      Navigator.pushNamed(context, OnTheAirTvsPage.ROUTE_NAME),
+                      Navigator.pushNamed(context, OnTheAirTVsPage.routeName),
                 ),
                 Consumer<TvListNotifier>(
-                  builder: (context, data, _) {
+                  builder: (_, data, _) {
                     final state = data.onTheAirState;
                     if (state == RequestState.Loading) {
                       return Center(child: CircularProgressIndicator());
                     } else if (state == RequestState.Loaded) {
-                      return TvList(data.onTheAirTvs);
+                      return TVList(data.onTheAirTvs);
                     } else {
                       return Text('Failed');
                     }
@@ -194,15 +192,15 @@ class _HomePageState extends State<HomePage> {
                 _buildSubHeading(
                   title: 'Popular',
                   onTap: () =>
-                      Navigator.pushNamed(context, PopularTvsPage.ROUTE_NAME),
+                      Navigator.pushNamed(context, PopularTVsPage.routeName),
                 ),
                 Consumer<TvListNotifier>(
-                  builder: (context, data, _) {
+                  builder: (_, data, _) {
                     final state = data.popularTvState;
                     if (state == RequestState.Loading) {
                       return Center(child: CircularProgressIndicator());
                     } else if (state == RequestState.Loaded) {
-                      return TvList(data.popularTvs);
+                      return TVList(data.popularTvs);
                     } else {
                       return Text('Failed');
                     }
@@ -211,15 +209,15 @@ class _HomePageState extends State<HomePage> {
                 _buildSubHeading(
                   title: 'Top Rated',
                   onTap: () =>
-                      Navigator.pushNamed(context, TopRatedTvsPage.ROUTE_NAME),
+                      Navigator.pushNamed(context, TopRatedTVsPage.routeName),
                 ),
                 Consumer<TvListNotifier>(
-                  builder: (context, data, _) {
+                  builder: (_, data, _) {
                     final state = data.topRatedTvState;
                     if (state == RequestState.Loading) {
                       return Center(child: CircularProgressIndicator());
                     } else if (state == RequestState.Loaded) {
-                      return TvList(data.topRatedTvs);
+                      return TVList(data.topRatedTvs);
                     } else {
                       return Text('Failed');
                     }
@@ -237,7 +235,7 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: kHeading6),
+        Text(title, style: textHeading6),
         InkWell(
           onTap: onTap,
           child: Padding(
@@ -271,14 +269,14 @@ class MovieList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MovieDetailPage.ROUTE_NAME,
+                  MovieDetailPage.routeName,
                   arguments: movie.id,
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$baseImageUrl${movie.posterPath}',
                   placeholder: (context, url) =>
                       Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => Icon(Icons.error),
@@ -293,10 +291,10 @@ class MovieList extends StatelessWidget {
   }
 }
 
-class TvList extends StatelessWidget {
-  final List<Tv> tvs;
+class TVList extends StatelessWidget {
+  final List<TV> tvs;
 
-  const TvList(this.tvs, {super.key});
+  const TVList(this.tvs, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -312,14 +310,14 @@ class TvList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  TvDetailPage.ROUTE_NAME,
+                  TVDetailPage.roueName,
                   arguments: tv.id,
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  imageUrl: '$baseImageUrl${tv.posterPath}',
                   placeholder: (context, url) =>
                       Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => Icon(Icons.error),

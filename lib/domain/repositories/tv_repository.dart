@@ -3,26 +3,26 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 
-abstract class TvRepository {
-  Future<Either<Failure, List<Tv>>> getAiringTodayTvs();
+abstract class TVRepository {
+  Future<Either<Failure, List<TV>>> getAiringTodayTvs();
 
-  Future<Either<Failure, List<Tv>>> getOnTheAirTvs();
+  Future<Either<Failure, List<TV>>> getOnTheAirTvs();
 
-  Future<Either<Failure, List<Tv>>> getPopularTvs();
+  Future<Either<Failure, List<TV>>> getPopularTvs();
 
-  Future<Either<Failure, List<Tv>>> getTopRatedTvs();
+  Future<Either<Failure, List<TV>>> getTopRatedTvs();
 
-  Future<Either<Failure, TvDetail>> getTvDetail(int id);
+  Future<Either<Failure, TVDetail>> getTvDetail(int id);
 
-  Future<Either<Failure, List<Tv>>> getTvRecommendations(int id);
+  Future<Either<Failure, List<TV>>> getTvRecommendations(int id);
 
-  Future<Either<Failure, List<Tv>>> searchTvs(String query);
+  Future<Either<Failure, List<TV>>> searchTvs(String query);
 
-  Future<Either<Failure, String>> saveWatchlist(TvDetail tv);
+  Future<Either<Failure, String>> saveWatchlist(TVDetail tv);
 
-  Future<Either<Failure, String>> removeWatchlist(TvDetail tv);
+  Future<Either<Failure, String>> removeWatchlist(TVDetail tv);
 
   Future<bool> isAddedToWatchlist(int id);
 
-  Future<Either<Failure, List<Tv>>> getWatchlistTvs();
+  Future<Either<Failure, List<TV>>> getWatchlistTvs();
 }

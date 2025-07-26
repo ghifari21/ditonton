@@ -2,7 +2,7 @@ import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
-class TvDetailResponse extends Equatable {
+class TVDetailResponse extends Equatable {
   final bool adult;
   final String? backdropPath;
   final List<int> episodeRunTime;
@@ -28,7 +28,7 @@ class TvDetailResponse extends Equatable {
   final double voteAverage;
   final int voteCount;
 
-  TvDetailResponse({
+  const TVDetailResponse({
     required this.adult,
     required this.backdropPath,
     required this.episodeRunTime,
@@ -55,65 +55,68 @@ class TvDetailResponse extends Equatable {
     required this.voteCount,
   });
 
-  factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
-      TvDetailResponse(
-        adult: json["adult"],
-        backdropPath: json["backdrop_path"],
-        episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        firstAirDate: json["first_air_date"],
-        genres: List<GenreModel>.from(
-          json["genres"].map((x) => GenreModel.fromJson(x)),
-        ),
-        homepage: json["homepage"],
-        id: json["id"],
-        inProduction: json["in_production"],
-        languages: List<String>.from(json["languages"].map((x) => x)),
-        lastAirDate: json["last_air_date"],
-        name: json["name"],
-        numberOfEpisodes: json["number_of_episodes"],
-        numberOfSeasons: json["number_of_seasons"],
-        originCountry: List<String>.from(json["origin_country"].map((x) => x)),
-        originalLanguage: json["original_language"],
-        originalName: json["original_name"],
-        overview: json["overview"],
-        popularity: (json["popularity"] as num).toDouble(),
-        posterPath: json["poster_path"],
-        status: json["status"],
-        tagline: json["tagline"] ?? '',
-        type: json["type"] ?? '',
-        voteAverage: (json["vote_average"] as num).toDouble(),
-        voteCount: json["vote_count"],
-      );
+  factory TVDetailResponse.fromJson(Map<String, dynamic> json) {
+    return TVDetailResponse(
+      adult: json["adult"],
+      backdropPath: json["backdrop_path"],
+      episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
+      firstAirDate: json["first_air_date"],
+      genres: List<GenreModel>.from(
+        json["genres"].map((x) => GenreModel.fromJson(x)),
+      ),
+      homepage: json["homepage"],
+      id: json["id"],
+      inProduction: json["in_production"],
+      languages: List<String>.from(json["languages"].map((x) => x)),
+      lastAirDate: json["last_air_date"],
+      name: json["name"],
+      numberOfEpisodes: json["number_of_episodes"],
+      numberOfSeasons: json["number_of_seasons"],
+      originCountry: List<String>.from(json["origin_country"].map((x) => x)),
+      originalLanguage: json["original_language"],
+      originalName: json["original_name"],
+      overview: json["overview"],
+      popularity: (json["popularity"] as num).toDouble(),
+      posterPath: json["poster_path"],
+      status: json["status"],
+      tagline: json["tagline"] ?? '',
+      type: json["type"] ?? '',
+      voteAverage: (json["vote_average"] as num).toDouble(),
+      voteCount: json["vote_count"],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-    "adult": adult,
-    "backdrop_path": backdropPath,
-    "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
-    "first_air_date": firstAirDate,
-    "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
-    "homepage": homepage,
-    "id": id,
-    "in_production": inProduction,
-    "languages": List<dynamic>.from(languages.map((x) => x)),
-    "last_air_date": lastAirDate,
-    "name": name,
-    "number_of_episodes": numberOfEpisodes,
-    "number_of_seasons": numberOfSeasons,
-    "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
-    "original_language": originalLanguage,
-    "original_name": originalName,
-    "overview": overview,
-    "popularity": popularity,
-    "poster_path": posterPath,
-    "status": status,
-    "tagline": tagline,
-    "type": type,
-    "vote_average": voteAverage,
-    "vote_count": voteCount,
-  };
+  Map<String, dynamic> toJson() {
+    return {
+      "adult": adult,
+      "backdrop_path": backdropPath,
+      "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
+      "first_air_date": firstAirDate,
+      "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+      "homepage": homepage,
+      "id": id,
+      "in_production": inProduction,
+      "languages": List<dynamic>.from(languages.map((x) => x)),
+      "last_air_date": lastAirDate,
+      "name": name,
+      "number_of_episodes": numberOfEpisodes,
+      "number_of_seasons": numberOfSeasons,
+      "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
+      "original_language": originalLanguage,
+      "original_name": originalName,
+      "overview": overview,
+      "popularity": popularity,
+      "poster_path": posterPath,
+      "status": status,
+      "tagline": tagline,
+      "type": type,
+      "vote_average": voteAverage,
+      "vote_count": voteCount,
+    };
+  }
 
-  TvDetail toEntity() {
-    return TvDetail(
+  TVDetail toEntity() {
+    return TVDetail(
       adult: adult,
       backdropPath: backdropPath,
       episodeRunTime: episodeRunTime,

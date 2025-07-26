@@ -16,9 +16,7 @@ class DatabaseHelper {
   static Database? _database;
 
   Future<Database?> get database async {
-    if (_database == null) {
-      _database = await _initDb();
-    }
+    _database ??= await _initDb();
     return _database;
   }
 
@@ -50,7 +48,7 @@ class DatabaseHelper {
     return await db!.insert(_tblWatchlist, movie.toJson());
   }
 
-  Future<int> insertTvWatchlist(TvTable tv) async {
+  Future<int> insertTvWatchlist(TVTable tv) async {
     final db = await database;
     return await db!.insert(_tblWatchlist, tv.toJson());
   }
@@ -64,7 +62,7 @@ class DatabaseHelper {
     );
   }
 
-  Future<int> removeTvWatchlist(TvTable tv) async {
+  Future<int> removeTvWatchlist(TVTable tv) async {
     final db = await database;
     return await db!.delete(
       _tblWatchlist,

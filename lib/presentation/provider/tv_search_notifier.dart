@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/search_tvs.dart';
 import 'package:flutter/material.dart';
 
 class TvSearchNotifier extends ChangeNotifier {
-  final SearchTvs searchTvs;
+  final SearchTVs searchTvs;
 
   TvSearchNotifier({required this.searchTvs});
 
@@ -12,9 +12,9 @@ class TvSearchNotifier extends ChangeNotifier {
 
   RequestState get state => _state;
 
-  List<Tv> _searchResult = [];
+  List<TV> _searchResult = [];
 
-  List<Tv> get searchResult => _searchResult;
+  List<TV> get searchResult => _searchResult;
 
   String _message = '';
 

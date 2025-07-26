@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetAiringTodayTvs usecase;
+  late GetAiringTodayTVs usecase;
   late MockTvRepository mockTvRepository;
 
   setUp(() {
     mockTvRepository = MockTvRepository();
-    usecase = GetAiringTodayTvs(mockTvRepository);
+    usecase = GetAiringTodayTVs(mockTvRepository);
   });
 
   test('should get list of airing today tvs from the repository', () async {

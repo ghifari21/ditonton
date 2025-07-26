@@ -11,11 +11,11 @@ import 'package:mockito/annotations.dart';
 @GenerateMocks(
   [
     MovieRepository,
-    TvRepository,
+    TVRepository,
     MovieRemoteDataSource,
-    TvRemoteDataSource,
+    TVRemoteDataSource,
     MovieLocalDataSource,
-    TvLocalDataSource,
+    TVLocalDataSource,
     DatabaseHelper,
   ],
   customMocks: [MockSpec<http.Client>(as: #MockHttpClient)],
