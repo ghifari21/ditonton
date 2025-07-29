@@ -36,7 +36,7 @@ runTests() {
       fi
 
       if [ -d "coverage" ]; then
-        # combine line coverage info from package tests to a common file
+        # combine line coverage info from package tests to a utils file
         sed "s/^SF:lib/SF:$escapedPath\/lib/g" coverage/lcov.info >>$2/coverage/test.info
         rm -f coverage/lcov.info
       fi

@@ -1,0 +1,309 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/core.dart';
+import 'package:core/domain/entities/movie.dart';
+import 'package:core/domain/entities/tv.dart';
+import 'package:core/presentation/provider/movie_list_notifier.dart';
+import 'package:core/presentation/provider/tv_list_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      Provider.of<MovieListNotifier>(context, listen: false)
+        ..fetchNowPlayingMovies()
+        ..fetchPopularMovies()
+        ..fetchTopRatedMovies();
+
+      Provider.of<TvListNotifier>(context, listen: false)
+        ..fetchAiringTodayTvs()
+        ..fetchOnTheAirTvs()
+        ..fetchPopularTvs()
+        ..fetchTopRatedTvs();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('assets/circle-g.png'),
+                backgroundColor: Colors.grey.shade900,
+              ),
+              accountName: Text('Ditonton'),
+              accountEmail: Text('ditonton@dicoding.com'),
+              decoration: BoxDecoration(color: Colors.grey.shade900),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.save_alt),
+              title: Text('Watchlist'),
+              onTap: () {
+                Navigator.pushNamed(context, watchlistRoute);
+              },
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, aboutRoute);
+              },
+              leading: Icon(Icons.info_outline),
+              title: Text('About'),
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        title: Text('Ditonton'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, searchRoute);
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Movies', style: textHeading5),
+                Text('Now Playing', style: textHeading6),
+                Consumer<MovieListNotifier>(
+                  builder: (_, data, _) {
+                    final state = data.nowPlayingState;
+                    if (state == RequestState.Loading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state == RequestState.Loaded) {
+                      return MovieList(data.nowPlayingMovies);
+                    } else {
+                      return Text('Failed');
+                    }
+                  },
+                ),
+                _buildSubHeading(
+                  title: 'Popular',
+                  onTap: () => Navigator.pushNamed(context, popularMoviesRoute),
+                ),
+                Consumer<MovieListNotifier>(
+                  builder: (_, data, _) {
+                    final state = data.popularMoviesState;
+                    if (state == RequestState.Loading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state == RequestState.Loaded) {
+                      return MovieList(data.popularMovies);
+                    } else {
+                      return Text('Failed');
+                    }
+                  },
+                ),
+                _buildSubHeading(
+                  title: 'Top Rated',
+                  onTap: () =>
+                      Navigator.pushNamed(context, topRatedMoviesRoute),
+                ),
+                Consumer<MovieListNotifier>(
+                  builder: (_, data, _) {
+                    final state = data.topRatedMoviesState;
+                    if (state == RequestState.Loading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state == RequestState.Loaded) {
+                      return MovieList(data.topRatedMovies);
+                    } else {
+                      return Text('Failed');
+                    }
+                  },
+                ),
+                const Divider(thickness: 1, height: 32),
+                Text('TV Series', style: textHeading5),
+                _buildSubHeading(
+                  title: 'Airing Today',
+                  onTap: () =>
+                      Navigator.pushNamed(context, airingTodayTvsRoute),
+                ),
+                Consumer<TvListNotifier>(
+                  builder: (_, data, _) {
+                    final state = data.airingTodayState;
+                    if (state == RequestState.Loading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state == RequestState.Loaded) {
+                      return TVList(data.airingTodayTvs);
+                    } else {
+                      return Text('Failed');
+                    }
+                  },
+                ),
+                _buildSubHeading(
+                  title: 'On The Air',
+                  onTap: () => Navigator.pushNamed(context, onTheAirTvsRoute),
+                ),
+                Consumer<TvListNotifier>(
+                  builder: (_, data, _) {
+                    final state = data.onTheAirState;
+                    if (state == RequestState.Loading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state == RequestState.Loaded) {
+                      return TVList(data.onTheAirTvs);
+                    } else {
+                      return Text('Failed');
+                    }
+                  },
+                ),
+                _buildSubHeading(
+                  title: 'Popular',
+                  onTap: () => Navigator.pushNamed(context, popularTvsRoute),
+                ),
+                Consumer<TvListNotifier>(
+                  builder: (_, data, _) {
+                    final state = data.popularTvState;
+                    if (state == RequestState.Loading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state == RequestState.Loaded) {
+                      return TVList(data.popularTvs);
+                    } else {
+                      return Text('Failed');
+                    }
+                  },
+                ),
+                _buildSubHeading(
+                  title: 'Top Rated',
+                  onTap: () => Navigator.pushNamed(context, topRatedTvsRoute),
+                ),
+                Consumer<TvListNotifier>(
+                  builder: (_, data, _) {
+                    final state = data.topRatedTvState;
+                    if (state == RequestState.Loading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state == RequestState.Loaded) {
+                      return TVList(data.topRatedTvs);
+                    } else {
+                      return Text('Failed');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Row _buildSubHeading({required String title, required Function() onTap}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title, style: textHeading6),
+        InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class MovieList extends StatelessWidget {
+  final List<Movie> movies;
+
+  const MovieList(this.movies, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          final movie = movies[index];
+          return Container(
+            padding: const EdgeInsets.all(8),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  movieDetailRoute,
+                  arguments: movie.id,
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: CachedNetworkImage(
+                  imageUrl: '$baseImageUrl${movie.posterPath}',
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              ),
+            ),
+          );
+        },
+        itemCount: movies.length,
+      ),
+    );
+  }
+}
+
+class TVList extends StatelessWidget {
+  final List<TV> tvs;
+
+  const TVList(this.tvs, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          final tv = tvs[index];
+          return Container(
+            padding: const EdgeInsets.all(8),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, tvDetailRoute, arguments: tv.id);
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                child: CachedNetworkImage(
+                  imageUrl: '$baseImageUrl${tv.posterPath}',
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              ),
+            ),
+          );
+        },
+        itemCount: tvs.length,
+      ),
+    );
+  }
+}
