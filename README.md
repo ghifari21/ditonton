@@ -1,4 +1,4 @@
-[![Codemagic build status](https://api.codemagic.io/apps/<app-id>/<workflow-id>/status_badge.svg)](https://codemagic.io/app/<app-id>/<workflow-id>/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/6883742b2f1509b2ccfad741/6883742b2f1509b2ccfad740/status_badge.svg)](https://codemagic.io/app/6883742b2f1509b2ccfad741/6883742b2f1509b2ccfad740/latest_build)
 
 # a199-flutter-expert-project
 
