@@ -1,0 +1,36 @@
+name: movie
+description: "A new Flutter package project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.8.1
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+  dartz: ^0.10.1
+  equatable: ^2.0.7
+  google_fonts: ^6.2.1
+  flutter_rating_bar: ^4.0.1
+  cached_network_image: ^3.4.1
+  path_provider: ^2.1.5
+  flutter_bloc: ^9.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mockito: ^5.5.0
+  build_runner: ^2.6.0
+  bloc_test: ^10.0.0
+  mocktail: ^1.0.4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - ../assets/

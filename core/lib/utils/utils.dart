@@ -1,5 +1,4 @@
 import 'package:core/domain/entities/genre.dart';
-import 'package:encrypt/encrypt.dart';
 import 'package:flutter/widgets.dart' hide Key;
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
@@ -17,15 +16,4 @@ String showDuration(int runtime) {
   } else {
     return '${minutes}m';
   }
-}
-
-String encrypt(String plainText) {
-  final key = Key.fromUtf8('kimi no aiba ga (ORE NO AIBA GA)');
-  final iv = IV.fromLength(16);
-
-  final encrypter = Encrypter(AES(key));
-
-  final encrypted = encrypter.encrypt(plainText, iv: iv);
-
-  return encrypted.base64;
 }

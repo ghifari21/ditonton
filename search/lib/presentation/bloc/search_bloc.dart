@@ -26,7 +26,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         (movies) {
           tvResult.fold(
             (failure) => emit(SearchError(failure.message)),
-            (tvs) => emit(SearchHasData(movies, tvs)),
+            (tvs) => emit(SearchLoaded(movies, tvs)),
           );
         },
       );

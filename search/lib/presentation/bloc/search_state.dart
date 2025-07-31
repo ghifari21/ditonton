@@ -22,11 +22,11 @@ class SearchError extends SearchState {
   List<Object> get props => [message];
 }
 
-class SearchHasData extends SearchState {
+class SearchLoaded extends SearchState {
   final List<Movie> movies;
   final List<TV> tvs;
 
-  const SearchHasData(this.movies, this.tvs);
+  const SearchLoaded(this.movies, this.tvs);
 
   @override
   List<Object> get props => [movies, tvs];

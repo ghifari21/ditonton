@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:core/core.dart';
 import 'package:core/data/models/movie_table.dart';
 import 'package:core/data/models/tv_table.dart';
 import 'package:sqflite_sqlcipher/sqflite.dart';
@@ -31,7 +30,7 @@ class DatabaseHelper {
       databasePath,
       version: 1,
       onCreate: _onCreate,
-      password: encrypt('umapyoi densetsu'),
+      password: 'umapyoi densetsu',
     );
     return db;
   }

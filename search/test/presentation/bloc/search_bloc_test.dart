@@ -10,7 +10,7 @@ import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/presentation/bloc/search_event.dart';
 import 'package:search/presentation/bloc/search_state.dart';
 
-import '../../dummy_data/dummy_objects.dart';
+import '../../../../core/test/dummy_data/dummy_objects.dart';
 import 'search_bloc_test.mocks.dart';
 
 @GenerateMocks([SearchMovies, SearchTVs])
@@ -42,12 +42,12 @@ void main() {
       ).thenAnswer((_) async => Right(testMovieList));
       when(
         mockSearchTVs.execute(tQuery),
-      ).thenAnswer((_) async => Right(testTVList));
+      ).thenAnswer((_) async => Right(testTvList));
       return searchBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
     wait: const Duration(milliseconds: 500),
-    expect: () => [SearchLoading(), SearchHasData(testMovieList, testTVList)],
+    expect: () => [SearchLoading(), SearchLoaded(testMovieList, testTvList)],
     verify: (bloc) {
       verify(mockSearchMovies.execute(tQuery));
       verify(mockSearchTVs.execute(tQuery));

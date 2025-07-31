@@ -60,7 +60,7 @@ class SearchPage extends StatelessWidget {
       builder: (context, state) {
         if (state is SearchLoading) {
           return Center(child: CircularProgressIndicator());
-        } else if (state is SearchHasData) {
+        } else if (state is SearchLoaded) {
           if (state.movies.isEmpty) {
             return const Center(child: Text("No results found."));
           }
@@ -86,7 +86,7 @@ class SearchPage extends StatelessWidget {
       builder: (context, state) {
         if (state is SearchLoading) {
           return Center(child: CircularProgressIndicator());
-        } else if (state is SearchHasData) {
+        } else if (state is SearchLoaded) {
           if (state.tvs.isEmpty) {
             return const Center(child: Text("No results found."));
           }

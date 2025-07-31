@@ -2,10 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/entities/tv.dart';
-import 'package:core/presentation/provider/movie_list_notifier.dart';
-import 'package:core/presentation/provider/tv_list_notifier.dart';
+import 'package:core/presentation/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,16 +18,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<MovieListNotifier>(context, listen: false)
-        ..fetchNowPlayingMovies()
-        ..fetchPopularMovies()
-        ..fetchTopRatedMovies();
-
-      Provider.of<TvListNotifier>(context, listen: false)
-        ..fetchAiringTodayTvs()
-        ..fetchOnTheAirTvs()
-        ..fetchPopularTvs()
-        ..fetchTopRatedTvs();
+      context.read<HomePageBloc>().add(FetchHomePageData());
     });
   }
 
@@ -82,131 +72,77 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Movies', style: textHeading5),
-                Text('Now Playing', style: textHeading6),
-                Consumer<MovieListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.nowPlayingState;
-                    if (state == RequestState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.Loaded) {
-                      return MovieList(data.nowPlayingMovies);
-                    } else {
-                      return Text('Failed');
-                    }
-                  },
+      body: BlocBuilder<HomePageBloc, HomePageState>(
+        builder: (context, state) {
+          if (state is HomePageLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is HomePageLoaded) {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Movies', style: textHeading5),
+                      Text('Now Playing', style: textHeading6),
+                      MovieList(state.nowPlayingMovies),
+
+                      _buildSubHeading(
+                        title: 'Popular',
+                        onTap: () =>
+                            Navigator.pushNamed(context, popularMoviesRoute),
+                      ),
+                      MovieList(state.popularMovies),
+
+                      _buildSubHeading(
+                        title: 'Top Rated',
+                        onTap: () =>
+                            Navigator.pushNamed(context, topRatedMoviesRoute),
+                      ),
+                      MovieList(state.topRatedMovies),
+
+                      const Divider(thickness: 1, height: 32),
+                      Text('TV Series', style: textHeading5),
+
+                      _buildSubHeading(
+                        title: 'Airing Today',
+                        onTap: () =>
+                            Navigator.pushNamed(context, airingTodayTvsRoute),
+                      ),
+                      TVList(state.airingTodayTvs),
+
+                      _buildSubHeading(
+                        title: 'On The Air',
+                        onTap: () =>
+                            Navigator.pushNamed(context, onTheAirTvsRoute),
+                      ),
+                      TVList(state.onTheAirTvs),
+
+                      _buildSubHeading(
+                        title: 'Popular',
+                        onTap: () =>
+                            Navigator.pushNamed(context, popularTvsRoute),
+                      ),
+                      TVList(state.popularTvs),
+
+                      _buildSubHeading(
+                        title: 'Top Rated',
+                        onTap: () =>
+                            Navigator.pushNamed(context, topRatedTvsRoute),
+                      ),
+                      TVList(state.topRatedTvs),
+                    ],
+                  ),
                 ),
-                _buildSubHeading(
-                  title: 'Popular',
-                  onTap: () => Navigator.pushNamed(context, popularMoviesRoute),
-                ),
-                Consumer<MovieListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.popularMoviesState;
-                    if (state == RequestState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.Loaded) {
-                      return MovieList(data.popularMovies);
-                    } else {
-                      return Text('Failed');
-                    }
-                  },
-                ),
-                _buildSubHeading(
-                  title: 'Top Rated',
-                  onTap: () =>
-                      Navigator.pushNamed(context, topRatedMoviesRoute),
-                ),
-                Consumer<MovieListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.topRatedMoviesState;
-                    if (state == RequestState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.Loaded) {
-                      return MovieList(data.topRatedMovies);
-                    } else {
-                      return Text('Failed');
-                    }
-                  },
-                ),
-                const Divider(thickness: 1, height: 32),
-                Text('TV Series', style: textHeading5),
-                _buildSubHeading(
-                  title: 'Airing Today',
-                  onTap: () =>
-                      Navigator.pushNamed(context, airingTodayTvsRoute),
-                ),
-                Consumer<TvListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.airingTodayState;
-                    if (state == RequestState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.Loaded) {
-                      return TVList(data.airingTodayTvs);
-                    } else {
-                      return Text('Failed');
-                    }
-                  },
-                ),
-                _buildSubHeading(
-                  title: 'On The Air',
-                  onTap: () => Navigator.pushNamed(context, onTheAirTvsRoute),
-                ),
-                Consumer<TvListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.onTheAirState;
-                    if (state == RequestState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.Loaded) {
-                      return TVList(data.onTheAirTvs);
-                    } else {
-                      return Text('Failed');
-                    }
-                  },
-                ),
-                _buildSubHeading(
-                  title: 'Popular',
-                  onTap: () => Navigator.pushNamed(context, popularTvsRoute),
-                ),
-                Consumer<TvListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.popularTvState;
-                    if (state == RequestState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.Loaded) {
-                      return TVList(data.popularTvs);
-                    } else {
-                      return Text('Failed');
-                    }
-                  },
-                ),
-                _buildSubHeading(
-                  title: 'Top Rated',
-                  onTap: () => Navigator.pushNamed(context, topRatedTvsRoute),
-                ),
-                Consumer<TvListNotifier>(
-                  builder: (_, data, _) {
-                    final state = data.topRatedTvState;
-                    if (state == RequestState.Loading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state == RequestState.Loaded) {
-                      return TVList(data.topRatedTvs);
-                    } else {
-                      return Text('Failed');
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+              ),
+            );
+          } else if (state is HomePageError) {
+            return Center(child: Text(state.message));
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
       ),
     );
   }
